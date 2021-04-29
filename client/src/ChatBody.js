@@ -10,7 +10,7 @@ const ChatBody = () => {
     const { roomId } = useParams();
     useEffect(async() => {
       if(roomId){
-        const roomData = await axios.get("/room",{params:{id:roomId}})
+        const roomData = await axios.get("https://surajcodeswhatsapp.herokuapp.com/room",{params:{id:roomId}})
         setMessages(roomData.data.messages)     
        }
     }, [roomId]);

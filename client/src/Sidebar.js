@@ -11,7 +11,6 @@ import { useStateValue } from "./StateProvider";
 import axios from "axios";
 import Pusher from "pusher-js";
 const Sidebar = () => {
-  const [ver,setVer] = useState("")
   const [rooms, setRooms] = useState([]);
   const [{ user }, dispatch] = useStateValue();
   useEffect(async() => {
@@ -38,8 +37,6 @@ const Sidebar = () => {
      
   })
   },[])
-  console.log("User:",user.email);
-console.log("ver",ver);
   const container = createRef();
   const [state, setState] = useState(false);
   const moreoptions = () => {
@@ -49,9 +46,8 @@ console.log("ver",ver);
     const name = prompt("please enter room name");
     if (name) {
       const created = await axios.post("/rooms",{name,email:user.email})
-      setVer(created.data)
-    } else {
-    }
+
+    } 
   };
 
   return (
