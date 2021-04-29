@@ -1,0 +1,28 @@
+.welcome{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex: 0.70;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.welcome img{
+    height: 300px;
+}
+.welcome h1{
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.welcome hr{
+    display: block;
+    background-color: black;
+    height: 0.01px;
+    width: 400px;
+    margin: 50px 0 50px 0;
+}
+.welcome h4{
+
+    font-weight: 400;
+    color: rgb(109, 104, 104);
+}

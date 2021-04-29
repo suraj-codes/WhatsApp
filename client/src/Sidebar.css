@@ -1,0 +1,132 @@
+.sidebar{
+    
+    height: 100vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    flex: 0.30;
+}
+.sidebar__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-right: 1px solid lightgray;
+    height: 20px;
+}
+
+.sidebar__header > .MuiAvatar-root{
+    margin-top: -10px;
+}
+.sidebar__headerright{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 10vw;
+}
+.sidebar__headerright > .MuiSvgIcon-root{
+    margin-right: 2vw;
+    font-size: 24px !important;
+}
+
+.sidebar__search{
+    display: flex;
+    align-items: center;
+    background-color: #f6f6f6;
+    height: 39px;
+    padding: 10px;
+}
+.sidebar__searchcontainer{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 20px;
+}
+.sidebar__searchcontainer > .MuiSvgIcon-root{
+    color: gray;
+    padding: 10px;
+}
+.sidebar__searchcontainer > input{
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+}
+.sidebar__chats{
+    flex: 1;
+    background-color: white;
+ overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+
+.dropdown {
+    background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  width: 200px;
+  z-index: 2;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  box-shadow: 0 16px 24px 2px rgba(66, 42, 42, 0.14);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.addbtn{
+    margin-right: 5px;
+}
+li{
+  padding: 8px 8px;
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+@media screen and (max-width: 480px){
+    .sidebar{
+        flex: 1;
+    }
+ .sidebar__header {
+     margin-top: 20px;
+ }
+ 
+.sidebar__headerright{
+    margin-right: -20px;
+    margin-top: -5px;
+}
+.sidebar__search{
+    width: 100%;
+}
+.sidebar__searchcontainer > input{
+    font-size: 20px;
+}
+
+
+.dropdown {
+    background-color: white;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  z-index: 2;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 16px 24px 2px rgba(66, 42, 42, 0.14);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li , .addbtn {
+  padding: 8px 12px;
+}
+
+}
