@@ -5,17 +5,20 @@ import axios from "./axios";
 import Pusher from "pusher-js";
 import { useStateValue } from './StateProvider';
 const ChatBody = () => {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
     const [messages, setMessages] = useState([]);
     const { roomId } = useParams();
-    useEffect(async() => {
-      if(roomId){
-        const roomData = await axios.get("https://surajcodeswhatsapp.herokuapp.com/room",{params:{id:roomId}})
-        setMessages(roomData.data.messages)     
-       }
+    useEffect(() => {
+      const renderRoom=async()=>{
+        if(roomId){
+          const roomData = await axios.get("https://surajcodeswhatsapp.herokuapp.com/room",{params:{id:roomId}})
+          setMessages(roomData.data.messages)     
+         }
+      }
+      renderRoom();
     }, [roomId]);
     
-    useEffect(async()=>{
+    useEffect(()=>{
     const pusher = new Pusher('f8bd1140c065095666d8', {
         cluster: 'ap2'
     });

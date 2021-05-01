@@ -11,6 +11,10 @@
     font-size: 16px;
     margin-bottom: 8px;
 }
+.sidebarchat__info > h1{
+    color: rgb(109, 104, 104);
+    font-size: 12px;
+}
 .sidebarchat__info{
     margin-left: 15px;
 }

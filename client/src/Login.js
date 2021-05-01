@@ -3,12 +3,9 @@ import "./Login.css";
 import { Button } from "@material-ui/core";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./reducer";
-import { useHistory,useParams } from "react-router-dom";
-import shadows from "@material-ui/core/styles/shadows";
 import axios from "axios";
 const Login = () => {
-  const history = useHistory();
-  const [{}, dispatch] = useStateValue();
+  const [{user},dispatch] = useStateValue();
   const [signup,setSignup] = useState(false);
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -36,7 +33,7 @@ const Login = () => {
     if(typeof(res.data)=="string"){
         alert(res.data)
       }else{
-        alert("Registered Successfully!!")
+        alert("Registered Successfully!!",user.name)
         dispatch({
                 type: actionTypes.SET_USER,
                 user: res.data,

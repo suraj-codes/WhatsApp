@@ -4,39 +4,31 @@ import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import "./Sidebar.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import { Add, SearchOutlined, SettingsVoiceRounded } from "@material-ui/icons";
+import { SearchOutlined } from "@material-ui/icons";
 
+import { actionTypes } from "./reducer";
 import SidebarChat from "./SidebarChat";
 import { useStateValue } from "./StateProvider";
 import axios from "axios";
-import Pusher from "pusher-js";
 const Sidebar = () => {
   const [rooms, setRooms] = useState([]);
   const [{ user }, dispatch] = useStateValue();
-  useEffect(async() => {
-    const roomData = await axios.get("/rooms",{params:{ids:user.rooms}})
+  
+  useEffect(() => {
+    const renderRoom =async()=>{
+      const roomData = await axios.get("/rooms",{params:{ids:user.rooms}})
       setRooms(
         roomData.data.map((doc) => ({
           name: doc.name,
           _id: doc._id,
+          lastMSG: doc.messages.length == 0?"No messages yet...":  doc.messages[doc.messages.length-1].message.content
         }))
       )
-  }, []);
-  useEffect(()=>{
-    const pusher = new Pusher('f8bd1140c065095666d8', {
-      cluster: 'ap2'
-    });
-    const channel = pusher.subscribe('rooms');
-    channel.bind('inserted', function(data) {
-        setRooms((prevState)=>(
-          [...prevState,{
-           name: data.room.name,
-           _id: data.room._id,
-         }]
-        ))
-     
-  })
-  },[])
+    }
+    renderRoom()
+  }, [user.rooms]);
+ 
+console.log(rooms);
   const container = createRef();
   const [state, setState] = useState(false);
   const moreoptions = () => {
@@ -45,11 +37,14 @@ const Sidebar = () => {
   const createChat = async() => {
     const name = prompt("please enter room name");
     if (name) {
-      const created = await axios.post("/rooms",{name,email:user.email})
-
+      const newRoom = await axios.post("/rooms",{name,email:user.email})
+      
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: newRoom.data,
+      });
     } 
   };
-
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -84,7 +79,7 @@ const Sidebar = () => {
       </div>
       <div className="sidebar__chats">
         {rooms.map((room) => (
-          <SidebarChat key={room._id} id={room._id} name={room.name} />
+          <SidebarChat key={room._id} id={room._id} name={room.name} lastMSG={room.lastMSG}/>
         ))}
       </div>
     </div>

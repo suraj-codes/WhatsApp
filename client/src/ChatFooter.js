@@ -8,7 +8,7 @@ import { useStateValue } from './StateProvider';
 import { useParams } from "react-router-dom";
 const ChatFooter = () => {
     const roomId = useParams()
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   const [input, setInput] = useState("");
     const sendMessage = async (e) => {
         setInput("");

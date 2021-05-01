@@ -1,5 +1,5 @@
 import { Avatar, IconButton } from '@material-ui/core';
-import { Email, MoreVert, SearchOutlined } from '@material-ui/icons';
+import { MoreVert, SearchOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React, { createRef, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
@@ -8,11 +8,16 @@ const ChatHeader = () => {
   const [seed, setSeed] = useState("");
   const [roomname, setRoomname] = useState("");
   const { roomId } = useParams();
-  useEffect(async() => {
-      if (roomId) {
-        const roomData = await axios.get("/room",{params:{id:roomId}})
-        setRoomname(roomData.data.name)
-       }
+  const [lastseen,setLastseen] = useState("")
+  useEffect(() => {
+      const renderRoomname = async()=>{
+        if (roomId) {
+          const roomData = await axios.get("/room",{params:{id:roomId}})
+          setLastseen(roomData.data.messages.length==0?"":roomData.data.messages[roomData.data.messages.length-1].message.time)
+          setRoomname(roomData.data.name)
+         }
+      }
+      renderRoomname()
       setSeed(Math.floor(Math.random() * 5000));
   }, [roomId]);
   const container = createRef();
@@ -34,7 +39,8 @@ const ChatHeader = () => {
         <div className="chat__headerinfo">
           <h3>{roomname}</h3>
           <p>
-            Last seen at {""}
+            {lastseen===""?"":`Last seen at ${lastseen}`}
+            
           </p>
         </div>
         <div className="chat__headerright">

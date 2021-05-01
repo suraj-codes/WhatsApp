@@ -99,7 +99,7 @@ route.post("/rooms",async(req,res)=>{
  const user = await User.findOne({ email: req.body.email })
  user.rooms.push(String(roomId._id))
  const update = await User.updateOne({email:user.email}, { $set: {rooms:user.rooms}})
-  res.send(req.body.email)
+  res.send(user);
 })
 
 route.get("/room",cors(),async(req,res)=>{

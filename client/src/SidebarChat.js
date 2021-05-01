@@ -1,10 +1,8 @@
 import Avatara from "./Avatar.js";
 import "./SidebarChat.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-const SidebarChat = ({ id, name }) => {
+const SidebarChat = ({ id, name, lastMSG }) => {
   
   return (
     <Link to={`/${id}`}>
@@ -12,6 +10,7 @@ const SidebarChat = ({ id, name }) => {
         <Avatara />
         <div className="sidebarchat__info">
           <h2>{name}</h2>
+          <h1>{lastMSG}</h1>
         </div>
       </div>
     </Link>
